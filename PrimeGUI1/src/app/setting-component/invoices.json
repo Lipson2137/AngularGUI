@@ -1,0 +1,24 @@
+[{
+    "Date":"24/01/22",
+    "paymentMethod":"card",
+    "cost":"30€",
+    "email":"jaklip3322@gmail.com",
+    "streetBilling1":"Grabowa 3",
+    "streetBilling2":"cos tam elo123",
+    "cityBilling":"Siedlce",
+    "postCodeBilling":"08-110",
+    "countryBilling":"Poland",
+    "VATID":"21372115"
+},{
+    "Date":"01/5/22",
+    "paymentMethod":"card",
+    "cost":"30€",
+    "email":"jaklip3322@gmail.com",
+    "streetBilling1":"Ujrzanow",
+    "streetBilling2":"",
+    "cityBilling":"Ujrzanow",
+    "postCodeBilling":"08-101",
+    "countryBilling":"Poland",
+    "VATID":""
+
+}]

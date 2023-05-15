@@ -1,0 +1,30 @@
+[{
+"proxy":"ultra.marsproxies.com",
+"login":"mr2414nRwJ",
+"password":"ML924HxHN6_set-ftl_session-2bt0msvc_skipispstatic-1",
+"port":44443,
+"proxyGroup":"ByteResi",
+"status":"IDLE"
+}
+,{
+    "proxy":"ultra.marsproxies.com",
+    "login":"mr2414nRwJ",
+    "password":"ML924HxHN6_set-ftl_session-gemyqdtq_skipispstatic-1",
+    "port":44443,
+    "proxyGroup":"MyResi",
+    "status":"IDLE"
+},{
+    "proxy":"ultra.marsproxies.com",
+    "login":"mr2414nRwJ",
+    "password":"ML924HxHN6_set-ftl_session-lswgig0d_skipispstatic-1",
+    "port":44443,
+    "proxyGroup":"ByteResi",
+    "status":"IDLE"
+},{
+    "proxy":"ultra.marsproxies.com",
+"login":"mr2414nRwJ",
+"password":"ML924HxHN6_set-ftl_session-kp64c06s_skipispstatic-1",
+"port":44443,
+"proxyGroup":"ByteResi",
+"status":"IDLE"
+}]

@@ -1,0 +1,53 @@
+<div class="flex mt-20 h-screen ">
+<div class="releases-calendar   bg-gray-700 border-solid  rounded-lg w-1/4 ml-4 h-2/3">
+    
+    <h1 style="font-family: poppins;"    class="text-cyan-50 text-center my-2  text-2xl pt-2" >Releases</h1>
+
+    <app-calendar-component></app-calendar-component>
+
+    
+</div>
+
+
+<div  class="ml-10 chart-checkout bg-gray-700 border-solid  rounded-lg  flex h-2/3">
+
+    <div>
+    <h1 style="font-family: poppins;" class="m-auto text-center text-cyan-50 text-2xl mt-4">Checkouts Feed</h1>
+   
+<app-chart-component></app-chart-component>
+
+</div>
+
+<div class="mx-5 my-3">
+    <h1 style="font-family: poppins;" class="text-cyan-50 text-2xl">Checkouts</h1>
+
+    <div class="checkoutsContainer">
+    <ng-container *ngFor="let checkout of checkoutsTab ">
+
+<div class="grid grid-cols-3 my-4">
+        <div class="mt-2 text-lg">
+        <h1 style="font-family: poppins;" class="text-gray-400">{{checkout.name}}</h1>
+        <h1 style="font-family: poppins;" class="text-gray-500">{{checkout.site}}</h1>
+    </div>
+    
+    <div  class="ml-6 mt-2 text-lg">
+        <h1 style="font-family: poppins;" class="text-gray-400">{{checkout.whenDay}}</h1>
+        <h1 style="font-family: poppins;" class="text-gray-500">{{checkout.price | currencyPipe}}</h1>
+    </div>
+
+    <div>
+        <img class=" w-14 h-14 rounded" src = {{checkout.img}}>
+    </div>
+    
+</div>
+
+    </ng-container>
+</div>
+</div>
+
+</div>
+
+</div>
+
+
+

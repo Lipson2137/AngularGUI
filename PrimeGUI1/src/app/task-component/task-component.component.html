@@ -1,0 +1,459 @@
+
+
+<div class="flex flex-wrap h-screen">
+    
+<div class="tasks_groups ml-4 bg-gray-700 border-solid  rounded-lg w-1/4 mt-20 py-3">
+
+    <div class="text-center">
+        <h1 style="font-family: poppins;" class="place-content-center text-gray-400 text-lg">TASK GROUPS</h1>
+    </div>
+
+    <div class="flex flex-wrap mt-4">
+    <div class="border-solid border-2 bg-gray-800 m-auto  rounded p-2 ">
+        <div id="search_bar" class="ml-3 flex ">
+
+            <input type="text" class=" bg-gray-800 outline-none text-cyan-50" [(ngModel)]="enteredSearchTaskName"
+            (input)="inSearchTextChanged()" placeholder="Search task group...">
+            <button class="bg-gray-800 ">
+                <fa-icon style="font-family: poppins;" class= " text-cyan-400 m-2" [icon]="faMagnifyingGlass"></fa-icon>
+            </button>
+        </div>
+    </div>
+
+    <div class="flex flex-wrap mr-3 border-solid border-4 bg-gray-800 border-gray-800 rounded-md"><button style="font-family: poppins;" class="bg-gray-800 text-indigo-400 rounded-lg p-2" type="submit" (click)="open(content)" >New Group</button><fa-icon class="text-indigo-400 bg-gray-800 m-auto" [icon]="faPLusLarge" ></fa-icon></div>
+
+</div>
+
+    <ng-container *ngFor = "let group of taskGroups">
+
+    <div *ngIf="enteredSearchTaskName==='' || checkIncludeTaskName(group.name.toLowerCase())" (click) = "change(group.name,group.arrObjects.length)"  class="  border-solid  rounded-md bg-black border-4 border-cyan-400  my-10 flex flex-col mx-4 ">
+        
+        <div class="flex flex-wrap">
+        <h1 style="font-family: poppins;"  class="text-cyan-50 mx-10 my-4">{{group.name}}</h1>
+        <h1 style="font-family: poppins;"  class="text-gray-400  my-4">( {{group.Count}} )</h1>
+    </div>
+
+    <div class="icon_status flex flex-wrap m-auto">
+        <p style="font-family: poppins;" class="text-green-400 mx-4"> <fa-icon class="mr-1"[icon]="faCircleCheck" ></fa-icon>{{group.success}}</p> 
+        <p style="font-family: poppins;" class="text-red-400 mx-4"> <fa-icon class="mr-1"[icon]="faXmarkCircle" ></fa-icon>{{group.error}}</p> 
+        <p style="font-family: poppins;" class="text-indigo-400 mx-4"> <fa-icon class="mr-1"[icon]="faShoppingCart" ></fa-icon>{{group.inBasket}}</p> 
+    <p style="font-family: poppins;" class="text-purple-400 mx-4"><fa-icon class="mr-1" [icon]="faSpinner"  ></fa-icon> {{group.running}}</p>
+    </div>
+        </div>
+
+</ng-container>
+
+</div>
+
+<div class="bg-gray-700 border-solid  rounded-lg mt-20 ml-10 w-2/3 ">
+
+
+  <div style="font-family: poppins;" class="flex flex-wrap ml-20 mt-2">
+    <h2 class="  text-cyan-400 mr-20 mt-2">{{nrOfTasks}} Tasks</h2>
+    <button (click)=modalDelaysEvent(idSite) (click)=open(groupDelays) class=" text-indigo-400  mt-2">Delays<fa-icon class="ml-2" [icon]="faClock"></fa-icon></button>
+    <div class="">
+      
+    <h2 style="font-family: poppins;" class="absolute ml-10 text-cyan-400 mt-2"[ngStyle]="{display: checkIfSelected()}">Selected tasks {{selectedCount()}} </h2>
+  </div>
+    <h1 class="text-xl text-gray-400  place-content-center ml-52">{{idSite}}</h1>
+</div>
+
+  
+    <div class=" float-right border-solid rounded-md bg-gray-600 border-gray-600 border-2 mt-3 mr-3 hover:bg-gray-700 hover:border-gray-700">
+    <button style="font-family: poppins;" id="taskCreator" class="p-1 text-red-400">Delete Tasks<fa-icon class="ml-2 text-lg text-red-400" [icon]="faMinus" ></fa-icon></button>
+    </div>
+    <div class=" float-right border-solid rounded-md bg-gray-600 border-gray-600 border-2 mt-3 mr-3 hover:bg-gray-700 hover:border-gray-700">
+        <button style="font-family: poppins;" id="taskCreator" class="p-1 text-emerald-400" (click) = "open(CreatecontentTask)">Create Tasks<fa-icon class="ml-2 text-lg text-emerald-400" [icon]="faPLusLarge" ></fa-icon></button>
+        </div>
+
+    <div class="task_headers grid grid-flow-col grid-cols-4  ml-10 w-max mb-3 gap-x-36">
+        <h2 style="font-family: poppins;" class="mt-4 text-gray-400 ">Site</h2>
+        <h2 style="font-family: poppins;" class="mt-4 text-gray-400 ">Product</h2>
+        <h2 style="font-family: poppins;" class="mt-4 text-gray-400 ">Profile</h2>
+        <h2 style="font-family: poppins;" class="mt-4 text-gray-400 ">Proxy</h2>
+        <h2 style="font-family: poppins;" class="mt-4 text-gray-400 ">Status</h2>
+      
+    </div>
+
+
+    <div class="task_container">
+    <ng-container *ngFor="let group of taskGroups">
+      <ng-container *ngIf="group.arrObjects.length>0; else blankPage"> 
+    <ng-container *ngFor = "let task of group.arrObjects; let i = index">
+        <div *ngIf="idSite === task.groupName" id="task{{i}}" class=" border-solid  rounded-md bg-gray-800 border-4 border-gray-800  my-3 grid grid-flow-col grid-cols-6 mx-2 gap-x-7 py-2 " [ngStyle]="{backgroundColor:bgColorSingleTask(i), borderColor:bgColorSingleTask(i)}" (click)="selectTaskChange(i)" >
+        
+        <h1 style="font-family: poppins;" class="text-gray-400 ml-7">{{task.name}}</h1>
+
+        <h1 style="font-family: poppins;" class="text-gray-400 ml-6">{{task.product}}</h1>
+
+        <h1 style="font-family: poppins;" class="text-gray-400 ml-5">{{task.profil}}</h1>
+
+        <h1 style="font-family: poppins;" class="text-gray-400  ml-4">{{task.proxyGroup}}</h1>
+
+        <h1 class="text-gray-400 ml-5" style="font-family: poppins;" [ngClass]="task.status==='processing'?'processingTask':task.status==='waiting for complete payment...'?'waitForComplete':task.status==='stopped'?'errorStopped':''">{{task.status}}</h1>
+        
+        <div class="flex flex-wrap">
+        <div [ngSwitch]="task.status">
+        <button *ngSwitchCase="'IDLE'" (click)="startSingleTask(task)">
+          <fa-icon class="mr-1 text-green-400" [icon]="faPLay"></fa-icon>
+        </button>
+        <button *ngSwitchCase="'stopped'" (click)="startSingleTask(task)">
+          <fa-icon class="mr-1 text-green-400" [icon]="faPLay"></fa-icon>
+        </button>
+        <button *ngSwitchDefault (click)="stopSingleTask(task)">
+          <fa-icon class="mr-1 text-red-500" [icon]="faPause"></fa-icon>
+        </button>
+        </div>
+
+        <button class="ml-6" (click) = setObjTaskModal(task.name,task.profil,task.sizes,task.product,task.status,task.groupName,task.proxyGroup,task.paymentId,task.monitorDelay,task.errorDelay,task)
+        (click) = open(SinglecontentTask)><fa-icon [icon]="faPenToSquare" class="text-indigo-400"></fa-icon></button>
+        <button class="ml-6" (click)="deleteSingleTask(task)"><fa-icon [icon]="faTrash" class="text-red-500"></fa-icon></button>
+
+        <div id="inputPreview" class="m-auto">
+
+          <input name="cssCheckbox" id="demo_opt_{{i}}" type="checkbox" class="css-checkbox" [(ngModel)]="tabChecked[i]">
+          <label for="demo_opt_{{i}}"></label>
+        </div>
+
+        </div>
+
+        </div>
+
+    </ng-container>
+  </ng-container>
+    <ng-template #blankPage>
+      <ng-container *ngIf="group.name===idSite">
+
+      <h1 style="font-family: poppins;" class="text-gray-400 text-center mt-20">Nothing to see here, add some tasks</h1>
+
+  </ng-container> -->
+ </ng-template> 
+</ng-container>
+</div>
+
+<div class="flex flex-wrap  justify-center space-x-16">
+<button style="font-family: poppins;" id="startButton" class=" px-4 py-3 border-solid border-2 border-emerald-400 bg-emerald-400 hover:bg-emerald-600 hover:border-emerald-600 rounded" (click)="startAllTasks()">Start Tasks</button>
+<button style="font-family: poppins;" id="stopButton" class=" px-4 py-3 border-solid border-2 border-red-400 bg-red-400 hover:bg-red-600 hover:border-red-600 rounded" (click)="stopAllTasks()">Stop Tasks</button>
+</div>
+
+</div>
+</div>
+
+
+
+<ng-template #content let-modal >
+    
+    <div class="border-solid  rounded-md border-4 border-cyan-400 bg-gray-800">
+
+        <div class="flex flex-wrap  mb-4 mt-4">
+
+            <fa-icon class="text-lg text-gray-500 mr-2 ml-40" [icon]="faLayerGroup"></fa-icon>
+
+      <h4  style="font-family: poppins;" class=" text-cyan-50  text-lg mr-32 " >New Group</h4>
+
+      
+    </div>
+
+    <div>
+      <form>
+        <div class="mb-3 mt-3">
+         
+          <div class="ml-32 flex flex-wrap">
+          <input style="font-family: poppins;" type="text" id="inputGroupName" class="border-solid rounded py-1 px-2 text-center content-center	bg-gray-500" placeholder="Type your group name" [(ngModel)]="newGroupName" name="nameGroup">
+          </div>
+        </div>
+      </form>
+    </div>
+    
+      <button style="font-family: poppins;"  type="button" class=" text-cyan-50 rounded px-3 py-2 bg-indigo-400 hover:bg-indigo-700 ml-40 mb-3 mt-3" (click) = "createGroup(newGroupName)" (click)="modal.close('Save click')">Create Group</button>
+  
+</div>
+  </ng-template>
+  
+  <pre>{{ closeResult }}</pre>
+
+
+
+  <ng-template #CreatecontentTask let-modal >
+    
+    <div class="border-solid  rounded-md border-4 border-cyan-400 bg-gray-800">
+
+        <div class="flex flex-wrap  mb-4 mt-4">
+
+            <fa-icon class="text-lg text-emerald-400 mr-2 ml-40" [icon]="faPlusCircle"></fa-icon>
+
+      <h4  style="font-family: poppins;" class=" text-cyan-50  text-lg mr-32 " >Task Creator</h4>
+    </div>
+
+    <div>
+      <form>
+
+        <div class="grid grid-flow-col ">
+        <div class="mb-3 mt-3">
+
+            <div class="flex flex-wrap  space-x-8 place-content-center mb-3">
+                <div class="site-select">
+               <h1 class="text-gray-400 mb-1" style="font-family: poppins;">Site</h1>
+                <select style="font-family: poppins;" name="sites" id="sites" class=" border-solid border-2 rounded text-gray-300 border-gray-500 bg-gray-500 py-1 px-2" [(ngModel)]="siteTaskName">
+                    <option value="Footlocker PL">Footlocker PL</option>
+                    <option value="KithEU">KithEU</option>
+                    <option value="Zalando PL">Zalando PL</option>
+                    <option value="ShopifyEU">ShopifyEU</option>
+                  </select>
+                </div>
+                <div class="size-select">
+                  <h1 class="text-gray-400 mb-1" style="font-family: poppins;">Sizes</h1>
+                  <select name="sizes" id="sizes" style="font-family: poppins;" class=" border-solid border-2 rounded border-gray-500 bg-gray-500 text-gray-300 py-1 px-2" [(ngModel)]="sizes">
+                    <option value="Random">Random</option>
+                    <option value="36.5">36.5</option>
+                    <option value="38">38</option>
+                    <option value="38.5">38.5</option>
+                    <option value="39">39</option>
+                    <option value="40">40</option>
+                    <option value="40.5">40.5</option>
+                    <option value="41">41</option>
+                    <option value="41.5">41.5</option>
+                    <option value="42">42</option>
+                    <option value="43">43</option>
+                    <option value="44">44</option>
+                  </select>
+                </div>
+            </div>
+            <div>
+
+            </div>
+         
+          <div class="ml-32 mb-4">
+            <h1 style="font-family: poppins;" class="text-gray-400"> Product input </h1>
+          <input name="productInput" id="productInput" style="font-family: poppins;" type="text"  class="border-solid rounded py-1 px-2 text-center content-center bg-gray-500" placeholder="type here product input" [(ngModel)]="product">
+          </div>
+
+          <div class="flex flex-wrap space-x-8 place-content-center">
+            <div>
+            <h1 style="font-family: poppins;" class="text-gray-400">Profiles</h1>
+            <select name="profiles" id="profiles" style="font-family: poppins;" class="border-solid border-2 rounded border-gray-500 bg-gray-500 text-gray-300 px-3 py-1" [(ngModel)]="profil">
+                <option value="Profile1">Profile1</option>
+                <option value="Profile2">Profile2</option>
+              </select>
+            </div>
+            <div>
+                <h1 style="font-family: poppins;" class="text-gray-400">Proxy</h1>
+                <select name="proxy" id="proxy" style="font-family: poppins;" class="border-solid border-2 rounded border-gray-500 bg-gray-500 text-gray-300 px-3 py-1" [(ngModel)]="proxyGroup">
+                 
+                    <option *ngFor="let proxyName of proxyGroupNames" [value]="proxyName">{{proxyName}}</option>
+                   
+                
+                  </select>
+            </div>
+            <div>
+                <h1 style="font-family: poppins;" class="text-gray-400">Payment method</h1>
+                <select name="payment" id="payment" style="font-family: poppins;" class="border-solid border-2 rounded border-gray-500 bg-gray-500 text-gray-300 px-3 py-1" [(ngModel)]="paymentId">
+                    <option value="Proxy1">Card</option>
+                    <option value="Proxy2">Paypal</option>
+                  </select>
+            </div>
+          </div>
+
+          <h1 style="font-family: poppins;" class="text-gray-400 mt-5 text-center mb-1">Specyfic delays(optional)</h1>
+
+          <div class="flex flex-wrap space-x-8 place-content-center">
+            <div>
+                <h1 style="font-family: poppins;" class="text-gray-400">Monitor delay</h1>
+                <input name="Delay" id="Delay" style="font-family: poppins;" type="number" class="border-solid border-2 rounded border-gray-400 bg-gray-400 w-36" [(ngModel)]="monitorDelay">
+            </div>
+            <div>
+                <h1 class="text-gray-400" style="font-family: poppins;">Error delay</h1>
+                <input name="errorDelay" id="errorDelay" style="font-family: poppins;" type="number" class="border-solid border-2 rounded border-gray-400 bg-gray-400 w-36" [(ngModel)]="errorDelay">
+            </div>
+          </div>
+
+
+          <div class="text-center mt-1">
+            <h1 class="text-gray-400 m-auto" style="font-family: poppins;">Task quantity</h1>
+            <input style="font-family: poppins;" name="taskQuantity" id="taskQuantity" type="number" class="border-solid border-2 rounded border-gray-400 bg-gray-400 w-20" [(ngModel)]="quantity">
+          </div>
+
+        </div>
+
+    </div>
+      </form>
+    </div>
+    
+    <div>
+      <button style="font-family: poppins;"  type="button" class=" text-cyan-50 rounded px-3 py-2 bg-indigo-400 hover:bg-indigo-700 ml-44 mb-3 mt-3" (click) = "createTask(siteTaskName, profil, sizes, product,idSite, proxyGroup, paymentId, monitorDelay, errorDelay, quantity)" (click)="modal.close('Save click')">Create Task</button>
+    </div>
+  
+</div>
+  </ng-template>
+  
+  <pre>{{ closeResult }}</pre>
+
+
+
+
+
+
+  <ng-template #SinglecontentTask let-modal >
+    
+    <div class="border-solid  rounded-md border-4 border-cyan-400 bg-gray-800">
+
+        <div class="flex flex-wrap  mb-4 mt-4" >
+
+            <fa-icon class="text-lg text-emerald-400 mr-2 ml-48" [icon]="faPenToSquare"></fa-icon>
+
+      <h4  style="font-family: poppins;" class=" text-cyan-50  text-lg mr-32 " >Edit Task</h4>
+
+      
+    </div>
+
+    <div>
+      <form>
+
+        <div class="grid grid-flow-col ">
+        <div class="mb-3 mt-3">
+
+            <div class="flex flex-wrap  space-x-8 place-content-center mb-3">
+                <div class="site-select">
+               <h1 class="text-gray-400 mb-1" style="font-family: poppins;">Site</h1>
+                <select style="font-family: poppins;" name="sites" id="sites" class=" border-solid border-2 rounded text-gray-300 border-gray-500 bg-gray-500 py-1 px-2" [(ngModel)]='nameModalTask' id="taskIdeloelo" >
+                    <option value="FootlockerEU">Footlocker EU</option>
+                    <option value="KithEU">KithEU</option>
+                    <option value="Zalando PL">Zalando PL</option>
+                    <option value="ShopifyEU">ShopifyEU</option>
+                  </select>
+                </div>
+                <div class="size-select">
+                  <h1 class="text-gray-400 mb-1" style="font-family: poppins;">Sizes</h1>
+                  <select name="sizes" id="sizes" style="font-family: poppins;" class=" border-solid border-2 rounded border-gray-500 bg-gray-500 text-gray-300 py-1 px-2" [(ngModel)]="sizes">
+                    <option value="Random">Random</option>
+                    <option value="36.5">36.5</option>
+                    <option value="38">38</option>
+                    <option value="38.5">38.5</option>
+                    <option value="39">39</option>
+                    <option value="40">40</option>
+                    <option value="40.5">40.5</option>
+                    <option value="41">41</option>
+                    <option value="41.5">41.5</option>
+                    <option value="42">42</option>
+                    <option value="43">43</option>
+                    <option value="44">44</option>
+                  </select>
+                </div>
+            </div>
+            <div>
+
+            </div>
+         
+          <div class="ml-32 mb-4">
+            <h1 style="font-family: poppins;" class="text-gray-400"> Product input </h1>
+          <input name="productInput" id="productInput" style="font-family: poppins;" type="text"  class="border-solid rounded py-1 px-2 text-center content-center bg-gray-500" placeholder="type here product input" [(ngModel)]="productModalTask">
+          </div>
+
+          <div class="flex flex-wrap space-x-8 place-content-center">
+            <div>
+            <h1 style="font-family: poppins;" class="text-gray-400">Profiles</h1>
+            <select name="profiles" id="profiles" style="font-family: poppins;" class="border-solid border-2 rounded border-gray-500 bg-gray-500 text-gray-300 px-3 py-1" [(ngModel)]="profilModalTask">
+                <option value="Profile1">Profile1</option>
+                <option value="Profile2">Profile2</option>
+              </select>
+            </div>
+            <div>
+                <h1 style="font-family: poppins;" class="text-gray-400">Proxy</h1>
+                <select name="proxy" id="proxy" style="font-family: poppins;" class="border-solid border-2 rounded border-gray-500 bg-gray-500 text-gray-300 px-3 py-1" [(ngModel)]="proxyGroupModalTask">
+                  <ng-container *ngFor="let proxyGroup of ">
+                    <option value="Proxy1">Proxy1</option>
+                    <option value="Proxy2">Proxy2</option>
+                  </ng-container>
+                  </select>
+            </div>
+            <div>
+                <h1 style="font-family: poppins;" class="text-gray-400">Payment method</h1>
+                <select name="payment" id="payment" style="font-family: poppins;" class="border-solid border-2 rounded border-gray-500 bg-gray-500 text-gray-300 px-3 py-1" [(ngModel)]="paymentId">
+                    <option value="Proxy1">Card</option>
+                    <option value="Proxy2">Paypal</option>
+                  </select>
+            </div>
+          </div>
+
+          <h1 style="font-family: poppins;" class="text-gray-400 mt-5 text-center mb-1">Specyfic delays(optional)</h1>
+
+          <div class="flex flex-wrap space-x-8 place-content-center">
+            <div>
+                <h1 style="font-family: poppins;" class="text-gray-400">Monitor delay</h1>
+                <input name="Delay" id="Delay" style="font-family: poppins;" type="number" class="border-solid border-2 rounded border-gray-400 bg-gray-400 w-36" [(ngModel)]="monitorDelayModalTask">
+            </div>
+            <div>
+                <h1 class="text-gray-400" style="font-family: poppins;">Error delay</h1>
+                <input name="errorDelay" id="errorDelay" style="font-family: poppins;" type="number" class="border-solid border-2 rounded border-gray-400 bg-gray-400 w-36" [(ngModel)]="errorDelayModalTask">
+            </div>
+          </div>
+
+
+          <div class="text-center mt-1">
+            <h1 class="text-gray-400 m-auto" style="font-family: poppins;">Task quantity</h1>
+            <input style="font-family: poppins;" name="taskQuantity" id="taskQuantity" type="number" class="border-solid border-2 rounded border-gray-400 bg-gray-400 w-20" [(ngModel)]="quantity">
+          </div>
+
+        </div>
+
+    </div>
+      </form>
+    </div>
+    
+    <div>
+      <button style="font-family: poppins;"  type="button" class=" text-cyan-50 rounded px-3 py-2 bg-indigo-400 hover:bg-indigo-700 ml-52 mb-3 mt-3" (click) = "saveTaskSettings(entireTaskObj)" (click)="modal.close('Save click')">Save</button>
+    </div>
+  
+</div>
+  </ng-template>
+  
+  <pre>{{ closeResult }}</pre>
+
+
+  <ng-template #groupDelays let-modal >
+    
+    <div class="border-solid  rounded-md border-4 border-cyan-400 bg-gray-800">
+
+        <div class="flex flex-wrap  mb-4 mt-4 ml-11">
+
+            <fa-icon class="text-lg text-gray-500 mr-2 ml-40" [icon]="faClock"></fa-icon>
+
+      <h4  style="font-family: poppins;" class=" text-cyan-50  text-lg mr-32 " >Delays</h4>
+
+      
+    </div>
+
+    <div>
+      <form>
+        <div class="mb-3 mt-3">
+        
+          <div class="ml-10 flex flex-wrap">
+            <div class="w-1/3">
+              <h1 class="text-cyan-50 mb-1" style="font-family: poppins;">Monitor delay</h1>
+              <input style="font-family: poppins;" type="text" id="inptMonitorDelay"
+                class="border-solid rounded py-1 px-2 text-center content-center	bg-gray-500 w-1/3" placeholder="Monitor"
+                [(ngModel)]="monitorDelayModal" name="monitorDelayModal">
+            </div>
+            <div>
+              <h1 class="text-cyan-50 mb-1" style="font-family: poppins;">Retry delay</h1>
+              <input style="font-family: poppins;" type="text" id="inputRetryDelay"
+                class="border-solid rounded py-1 px-2 text-center content-center	bg-gray-500 w-1/3" placeholder="Retry"
+                [(ngModel)]="retryDelayModal" name="retryDelayModal">
+            </div>
+            <div class=" ml-20 m-auto">
+              <h1 class="text-cyan-50 mb-1" style="font-family: poppins;">Timeout</h1>
+              <input style="font-family: poppins;" type="text" id="inputRetryDelay"
+                class="border-solid rounded py-1 px-2 text-center content-center	bg-gray-500 w-1/3" placeholder="Timeout"
+                [(ngModel)]="timeoutModal" name="timeoutModal">
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    
+      <button style="font-family: poppins;"  type="button" class=" text-cyan-50 rounded px-3 py-2 bg-indigo-400 hover:bg-indigo-700 ml-40 mb-3 mt-3" (click) = "createGroup(newGroupName)" (click)="modal.close('Save click')">Save</button>
+  
+</div>
+  </ng-template>
+  
+  <pre>{{ closeResult }}</pre>

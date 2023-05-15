@@ -1,0 +1,83 @@
+
+<div class="flex flex-wrap">
+    <div class="releasesContainer felx flex-col bg-gray-700">
+    <ng-container *ngFor = "let release of releases">
+
+     <div class=" border-solid  rounded-md bg-black border-4 border-cyan-400 my-3 flex  mx-4 " (click)="open(productPopup)" >
+        
+        <img class="bestsellerImg w-40  h-40" src = {{release.image}}>
+        <div class="flex flex-col">
+            
+        <h1 style="font-family: poppins;"  class="text-cyan-50 mx-10 my-4">{{release.productName}}</h1>
+
+        <a href={{release.link}} class="m-auto"><fa-icon class="text-2xl text-cyan-50 m-auto w-auto" [icon] = "faLink"></fa-icon></a>
+
+        <button style="font-family: poppins;" id="quickTasksReleaseButton" class="bg-gray-500 text-cyan-50 m-auto rounded-full px-2 mt-2">QuickTasks</button>
+
+        <h3 style="font-family: poppins;"  class="text-gray-400 m-auto">{{release.releaseDate}}</h3>
+    </div>
+
+     </div>
+
+
+
+
+<ng-template #productPopup let-modal >
+    
+    <div class="border-solid  rounded-md border-4 border-cyan-400 bg-gray-800">
+
+        <div class="flex flex-wrap  mb-4 mt-4">
+
+            <div class="border-solid border-2 border-cyan-800 rounded-full text-center m-auto bg-cyan-800 px-4">
+      <h4  style="font-family: poppins;" class=" text-cyan-50  text-lg  text-center" >{{release.productName}}</h4>
+    </div>   
+    </div>
+
+    <div>
+        <h1 style="font-family: poppins;" class="text-center text-sm text-gray-500">{{release.releaseDate}}</h1>
+    </div>
+    <div>
+      <form>
+        <div class="mb-3 mt-3">
+         
+          <div class=" flex flex-wrap m-auto text-center place-content-center">
+            <h1 style="font-family: poppins;" class=" text-cyan-50  mr-4 ml-3">Copy Link</h1>
+
+            <div class="border-solid border-2 border-gray-700 bg-gray-700 rounded">
+            <h2 style="font-family: poppins;" class=" text-gray-400 text-sm">{{release.link | releaseCalendarPipe}}</h2></div>
+      
+                <button ngxClipboard class="ml-4" [cbContent]="release.link"><fa-icon class="text-lg text-cyan-50 m-auto w-auto hover:text-indigo-300" [icon] = "faClone"></fa-icon></button>
+         
+          </div>
+
+          <div class=" flex flex-wrap mt-4 space-x-3 place-content-center">
+            <h1 style="font-family: poppins;" class=" text-cyan-50 ">Launch QuickTasks</h1>
+            <button><fa-icon class="text-xl text-cyan-50 hover:text-indigo-300 " [icon] = "faBolt"></fa-icon></button>
+        </div>
+
+        </div>
+      </form>
+    </div>
+    
+  
+</div>
+  </ng-template>
+
+  
+  <pre>{{ closeResult }}</pre>
+
+    </ng-container> 
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+

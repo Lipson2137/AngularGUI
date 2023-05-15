@@ -1,0 +1,144 @@
+<div class="flex flex-wrap h-screen mt-20">
+
+<div class="w-2/3 bg-gray-700 ml-36">
+    
+<div *ngIf="idSettingTab==0">
+<div class="account_model flex flex-wrap justify-center mt-10 mb-24">
+ 
+    <img  src="assets/accountLogo.png" width="100px" height="100px" class="rounded-full my-3">
+  
+    <div class="ml-14">
+    <h1 style="font-family: poppins;" class="text-cyan-50 text-2xl">Account</h1>
+    <h2 style="font-family: poppins;" class="text-gray-400 mt-4">Lipson#2940</h2>
+    </div>
+
+    <div class="my-auto text-2xl ml-28">
+        <a href="https://cybersole.io/dashboard" class="mx-20"> 
+            <fa-icon class="text-cyan-400 " [icon]="faDiagramSuccessor"></fa-icon> 
+        <h2 style="font-family: poppins;" class="text-lg text-cyan-50 ">Go to the dashboard</h2>
+        </a>
+
+    </div>
+</div>
+
+<div class="keyDetails text-2xl border-solid border-2 border-cyan-50 p-4 rounded-lg mx-5">
+    <div class="flex flex-wrap">
+    <div class="flex flex-wrap  m-auto">
+    <h1 style="font-family: poppins;" class="text-gray-400 mr-5">Key:</h1>
+
+    <div *ngIf="showKey == true" class="flex flex-wrap">
+    <h1 style="font-family: poppins;" class="text-cyan-50 my-auto">{{key | productKeyPipes}}</h1>
+  <fa-icon class="text-cyan-400 text-2xl" [icon]="faEllipsis"></fa-icon>
+    </div>
+
+    <div *ngIf="showKey == false" >
+        <h1 style="font-family: poppins;" class="text-cyan-50">{{key}}</h1>
+    </div>
+
+    </div> 
+
+<div class="flex flex-wrap mr-28">
+<fa-icon class="text-cyan-400" [icon]="showKey?faEye:faEyeSlash" (click)="showKeyFun()"></fa-icon>
+<button class="text-indigo-400 ml-10"><fa-icon [icon]="faClone"></fa-icon></button>
+<button class="text-red-500 ml-10"><fa-icon [icon]="faRotateLeft"></fa-icon></button>
+</div>
+</div>
+
+<div class="ml-10 flex flex-wrap mt-3 justify-center">
+    <h1 style="font-family: poppins;" class="text-sm text-gray-400 mr-2">Type: {{typeSubscription}}</h1>
+    <div *ngIf="typeSubscription=='Renewal'">
+    <h1 style="font-family: poppins;" class="text-sm text-gray-400 ml-2 mr-2">Subscription date: {{subscriptionDate}}</h1>
+    </div>
+    <div *ngIf="typeSubscription=='Renewal'">
+        <h1 style="font-family: poppins;" class="text-sm text-gray-400 ml-2">Price: {{priceRenewal}}€</h1>
+     </div>
+</div>
+
+
+</div>
+
+<div class="invoiceDetails border-solid border-2 border-cyan-50 rounded-lg p-4 w-1/2 mx-5 mt-20">
+    <h1 style="font-family: poppins;" class="m-auto text-cyan-50 text-center text-xl">History</h1>
+    <div class="flex flex-wrap">
+        <div class="invoiceSelector">
+            <h2 style="font-family: poppins;" class="m-auto text-cyan-50 mb-2">Invoices</h2>
+            <select [(ngModel)]="selectedInvoice" (ngModelChange)="onChange($event)" name="invoices"  style="font-family: poppins;"
+                class=" border-solid border-2 rounded text-gray-300 border-gray-500 bg-gray-500 py-1 px-4" >
+                <option *ngFor="let invoice of ivoicesTab" [ngValue]="invoice">{{invoice.Date}}</option>
+            </select>
+        </div>
+        <div class="invoiceDetail m-auto border-solid border-2 border-gray-700 rounded mt-4">
+
+            <div class="flex flex-wrap justify-center text-xl m-auto">
+                <h1 style="font-family: poppins;"  class="text-center text-cyan-50 mr-2 mt-1">{{selectedInvoice.Date}}</h1>
+                <fa-icon class="text-cyan-500  my-auto" [icon]="faReceipt"></fa-icon>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4 mt-4">
+                <h2 style="font-family: poppins;" class="text-cyan-50 mr-5 ml-3"><div class="text-gray-400">e-mail:</div> {{selectedInvoice.email}}</h2>
+                <h2 style="font-family: poppins;" class="text-cyan-50"><div class="text-gray-400">Payment method:</div> {{selectedInvoice.paymentMethod}}</h2>
+            </div>
+            <div class="grid grid-cols-2 gap-4 mt-3">
+                <h2 style="font-family: poppins;" class="text-cyan-50 mr-5 ml-3"><div class="text-gray-400">Adress:</div>  {{selectedInvoice.streetBilling1}}</h2>
+                <h2 style="font-family: poppins;" class="text-cyan-50"><div class="text-gray-400">Adress 2 (optional):</div>{{selectedInvoice.streetBilling2}}</h2>
+            </div>
+            <div class="grid grid-cols-2 gap-4  mt-3">
+                <h2 style="font-family: poppins;" class="text-cyan-50 mr-5 ml-3"><div class="text-gray-400">Post Code:</div>{{selectedInvoice.postCodeBilling}}</h2>
+                <h2 style="font-family: poppins;" class="text-cyan-50"><div class="text-gray-400">Country:</div>{{selectedInvoice.countryBilling}}</h2>
+            </div>
+            <div class="grid grid-cols-2 gap-4  mt-3">
+                <h2 style="font-family: poppins;" class="text-cyan-50 mr-5 ml-3"><div class="text-gray-400">Price:</div>{{selectedInvoice.cost}}</h2>
+                <h2 style="font-family: poppins;" class="text-cyan-50"><div class="text-gray-400">VAT ID (optional):</div>{{selectedInvoice.VATID}}</h2>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</div>
+
+
+<div *ngIf="idSettingTab==3">
+
+    <div style="font-family: poppins;" class="delay detailsborder-solid border-2 border-cyan-50 p-4 rounded-lg mx-5 mt-5">
+       <h1 class="text-center text-cyan-50 text-2xl">Delays</h1>
+       <div class="flex flex-wrap justify-center">
+        <div class="mr-4">
+        <h1 class="text-lg text-cyan-50">Monitor</h1>
+        <input class="bg-gray-400 placeholder-gray-600 border-solid border-3 border-gray-400 rounded px-2 py-1" type="text" placeholder="Put monitor delay here">
+        </div>
+        <div class="ml-4">
+            <h1 class="text-lg text-cyan-50">Retry</h1>
+            <input class="bg-gray-400 placeholder-gray-600 border-solid border-3 border-gray-400 rounded px-2 py-1" type="text" placeholder="Put retry delay here">
+        </div>
+        <div class="ml-4">
+            <h1 class="text-lg text-cyan-50">Timeout</h1>
+            <input class="bg-gray-400 placeholder-gray-600 border-solid border-3 border-gray-400 rounded px-2 py-1" type="text" placeholder="Put timeout value here">
+        </div>
+       </div>
+       
+    </div>
+
+</div>
+
+
+</div>
+
+
+<div style="font-family: poppins;" class=" bg-gray-600 border-solid justify-center place-content-center mr-10">
+    <div class=" ml-32 mt-5">
+        <button class="text-cyan-50 text-center border-b-4 border-solid border-cyan-400 justify-center place-content-center rounded-sm" (click)="changeTabId(0)">General</button>
+    </div>
+    <div class=" ml-32 justify-center w-1/2 place-content-center justify-items-center justify-self-center mt-5">
+        <button class="text-cyan-50 text-center border-b-4 border-solid border-cyan-400 justify-center place-content-center rounded-sm" (click)="changeTabId(1)">Delays</button>
+    </div>
+    <div class=" ml-32 justify-center w-1/2 place-content-center justify-items-center justify-self-center mt-5">
+        <button class="text-cyan-50 text-center border-b-4 border-solid border-cyan-400 justify-center place-content-center rounded-sm" (click)="changeTabId(2)">Webhook</button>
+    </div>
+    <div class=" ml-32 justify-center w-1/2 place-content-center justify-items-center justify-self-center mt-5">
+        <button class="text-cyan-50 text-center border-b-4 border-solid border-cyan-400 justify-center place-content-center rounded-sm" (click)="changeTabId(3)">QuickTasks</button>
+    </div>
+
+</div>
+
+</div>

@@ -1,0 +1,74 @@
+[{
+    "name":"FootlockerEU",
+    "profil":"Billing1",
+    "sizes":"40 40.5 41",
+    "product":"force,1 , travis, scott",
+    "status":"processing",
+    "groupName":"Footlocker",
+    "proxyGroup":"BullISP",
+    "paymentId":"card",
+    "monitorDelay":2000,
+    "errorDelay":4000
+  },
+  {"name":"FootlockerEU",
+  "profil":"Billing1",
+  "sizes":"40 40.5 41",
+  "product":"force,1 , travis, scott",
+  "status":"IDLE",
+  "groupName":"Footlocker",
+  "proxyGroup":"BullISP",
+  "paymentId":"card",
+  "monitorDelay":2000,
+  "errorDelay":4000
+  },
+  {
+    "name":"FootlockerEU",
+    "profil":"Billing1",
+    "sizes":"40 40.5 41",
+    "product":"force,1 , travis, scott",
+    "status":"waiting for restocks(ATC...)",
+    "groupName":"Footlocker",
+    "proxyGroup":"BullISP",
+    "paymentId":"card",
+    "monitorDelay":2000,
+    "errorDelay":4000
+  },
+  {
+    "name":"FootlockerEU",
+    "profil":"Billing1",
+    "sizes":"40 40.5 41",
+    "product":"force,1 , travis, scott",
+    "status":"waiting for restocks(ATC...)",
+    "groupName":"Footlocker",
+    "proxyGroup":"BullISP",
+    "paymentId":"card",
+    "monitorDelay":2000,
+    "errorDelay":4000
+
+  },
+  {
+    "name":"FootlockerEU",
+    "profil":"Billing1",
+    "sizes":"40 40.5 41",
+    "product":"force,1 , travis, scott",
+    "status":"processing",
+    "groupName":"Footlocker",
+    "proxyGroup":"BullISP",
+    "paymentId":"card",
+    "monitorDelay":2000,
+    "errorDelay":4000
+    
+  },
+  {
+    "name":"Asphaltgold",
+    "profil":"Billing1",
+    "sizes":"40 40.5 41",
+    "product":"force,1 , travis, scott",
+    "status":"waiting for restocks(ATC...)",
+    "groupName":"ShopifyEU",
+    "proxyGroup":"BullISP",
+    "paymentId":"card",
+    "monitorDelay":2000,
+    "errorDelay":4000
+   
+  }]

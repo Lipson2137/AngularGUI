@@ -1,0 +1,255 @@
+
+<div class="flex flex-wrap mt-20 h-screen">
+    <div class="releases-calendar   bg-gray-700 border-solid  rounded-lg w-1/4 ml-4 text-center">
+        
+        <h1 style="font-family: poppins;" class="place-content-center text-gray-400 text-lg mt-3" >Profiles Groups</h1>
+    
+        <ng-container *ngFor = "let profileGroup of profilesGroupTab">
+
+            <div   class="  border-solid  rounded-md bg-black border-4 border-cyan-400  my-10 flex flex-col mx-4 " (click)=changeIdGroup(profileGroup.name)>
+        
+                <div class="flex flex-wrap">
+                <h1 style="font-family: poppins;"  class="text-cyan-50 mx-10 my-4">{{profileGroup.name}}</h1>
+                <h1 style="font-family: poppins;"  class="text-gray-400  my-4 ml-32">( {{profileGroup.arrObjects.length}} )</h1>
+
+            </div>
+            </div>
+
+            </ng-container>
+  
+    
+        
+    </div>
+    
+    
+    <div  class="ml-10  bg-gray-700 border-solid  rounded-lg w-2/3">
+      
+        <h1 class="text-center text-xl text-gray-400 mt-2 ">{{idProfilesGroup}}</h1>
+        <div>
+<div
+    class=" float-right border-solid rounded-md bg-red-400 border-red-400 border-2 mt-3 mr-3 hover:bg-gray-700 hover:border-gray-700">
+    <button style="font-family: poppins;" id="deleteProfiles" class="p-1 text-cyan-50">Clear Profiles</button>
+</div>
+<div
+    class=" float-right border-solid rounded-md bg-emerald-400 border-emerald-400 border-2 mt-3 mr-3 hover:bg-gray-700 hover:border-gray-700">
+    <button style="font-family: poppins;" id="profileCreator" class="p-1 text-cyan-50">Add Profile</button>
+</div>
+        
+      
+        <div class=" grid grid-flow-col grid-cols-4 gap-x-48 ml-10 w-max mb-3">
+            <h2 style="font-family: poppins;" class="mt-4 text-gray-400 ">Profile</h2>
+            <h2 style="font-family: poppins;" class="mt-4 text-gray-400 ">Email</h2>
+            <h2 style="font-family: poppins;" class="mt-4  text-gray-400 ">Card</h2>
+            <h2 style="font-family: poppins;" class="mt-4 text-gray-400 ">Adress</h2>
+        </div>
+        
+
+        <div class="profile_container">
+            
+            <ng-container *ngFor="let profileGroup of profilesGroupTab">
+               
+                <ng-container *ngIf="profileGroup.arrObjects.length>0; else blankPage"> 
+                
+            <ng-container *ngFor = "let profile of profileGroup.arrObjects">
+              
+                <div    *ngIf="idProfilesGroup === profile.profileGroup"  class=" border-solid  rounded-md bg-gray-800 border-4 border-gray-800  my-3 grid grid-flow-col grid-cols-5 gap-x-2 py-2 mx-2" >
+        
+                <h1 style="font-family: poppins;" class="text-gray-400 ml-8 my-auto">{{profile.profileName}}</h1>
+        
+                <h1 style="font-family: poppins;" class="text-gray-400 ml-6 my-auto">{{profile.email}}</h1>
+        
+                <div class="flex flex-wrap ml-5">
+                    <img class=" w-9 h-7 rounded my-auto" src="{{profile.cardVal | paymentCardPipe}}" >
+                <h1 style="font-family: poppins;" class="text-gray-400 ml-2 my-auto"><fa-icon class="text-gray-400 mr-1" [icon]="faEllipsis" ></fa-icon>{{profile.cardVal | paymentCardBlurPipe}}</h1>
+            </div>
+
+            <div class="ml-4 mt-1">
+                <h1 style="font-family: poppins;" class="text-gray-400 ">{{profile.shippingStreet}}</h1>
+                <h2 style="font-family: poppins;" class="text-sm text-gray-500">{{profile.shippingCity}} {{profile.shippingPostCode}}</h2>
+            </div>
+
+           <div class=" mr-5 my-auto">
+               <button><fa-icon class="ml-2 text-purple-400 mr-10 "  [icon]="faPenToSquare" (click) = "setObjProfileModal(profile.profileName,profile.sameBillingAsShipping,profile.email,profile.tel,profile.name,profile.secondName,profile.cardVal,profile.cardDateMonth,profile.cardDateYear,profile.cardCVV,profile.shippingStreet,profile.shippingStreet2,profile.shippingCity,profile.shippingPostCode,profile.shippingState,profile.billingStreet,profile.billingStreet2,profile.billingCity,profile.billingPostCode,profile.billingState,profile.profileGroup)"
+                
+                (click)="open(editSingleProfile)"></fa-icon></button> 
+
+               <button><fa-icon class="ml-2 text-red-500 mr-10 my-auto" [icon]="faTrash"></fa-icon>awda</button> 
+            </div>
+
+        
+                </div>
+
+             </ng-container> 
+        </ng-container>
+
+        <ng-template #blankPage>
+            <ng-container *ngIf="profileGroup.name===idProfilesGroup">
+
+            <h1 style="font-family: poppins;" class="text-gray-400 text-center mt-20">Nothing to see here, add some profiles</h1>
+
+        </ng-container> -->
+       </ng-template> 
+
+
+         </ng-container> 
+
+    
+    </div>
+    
+    </div>
+
+    
+
+    
+<ng-template #editSingleProfile let-modal >
+    
+    <div class="border-solid  rounded-md border-4 border-cyan-400 bg-gray-800">
+
+        <div class="flex flex-wrap  mb-4 mt-4">
+
+            <fa-icon class="text-lg mr-2 ml-40 text-emerald-400" [icon]="faPlusCircle"></fa-icon>
+
+      <h4  style="font-family: poppins;" class=" text-cyan-50  text-lg mr-32 " >Edit Profile</h4>
+
+      
+    </div>
+
+    <div>
+      <form>
+        <div class="mb-3 mt-3">
+            <div class="flex flex-wrap place-content-center">
+            <div class="ml-5">
+            <h1 style="font-family: poppins;" class="text-cyan-50 mb-2 mr-10">Profile Name </h1>
+          <input style="font-family: poppins;" type="text" id="inputProfileName" class="border-solid rounded py-1 px-2 text-center content-center	w-40" placeholder="Type your group name" [(ngModel)]="profileNameModal" name="nameGroup">
+          </div>
+          <div class="ml-20">
+            <h1 style="font-family: poppins;" class="text-cyan-50 mb-2 mr-10">Same Billing</h1>
+          <input style="font-family: poppins;" type="checkbox" id="sameBillingAsShippingCheckbox" class="border-solid rounded py-1 px-2 text-center content-center  border-2 border-cyan-400" placeholder="Type your group name" name="sameBillingAsShippingCheckbox" [(ngModel)]="sameBillingAsShippingModal">
+          </div>
+        </div>
+
+          <div class="flex flex-wrap place-content-center my-4">
+            <button style="font-family: poppins;" class="border-solid rounded-md border-2 border-cyan-400 bg-cyan-400 text-cyan-50 p-1 hover:bg-gray-700 hover:border-gray-700" (click)="changeEditTab('payment')">
+                Payment
+            </button>
+    
+            <button style="font-family: poppins;" class="border-solid rounded-md border-2 border-cyan-400 bg-cyan-400 text-cyan-50 p-1 mx-5 hover:bg-gray-700 hover:border-gray-700" (click)="changeEditTab('shipping')">
+                Shipping
+            </button>
+            <div *ngIf="sameBillingAsShippingModal==false">
+            <button style="font-family: poppins;" class="border-solid rounded-md border-2 border-cyan-400 bg-cyan-400 text-cyan-50 p-1 hover:bg-gray-700 hover:border-gray-700"  (click)="changeEditTab('billing')">
+                Billing
+            </button>
+          </div>
+          </div>
+
+          <div *ngIf="selectedTab=='payment'">
+            <div class="flex flex-wrap justify-center">
+            <div class="mr-5">
+            <h1 class="text-cyan-50 mb-2" style="font-family: poppins;">Card</h1>
+            <input style="font-family: poppins;" type="text" placeholder="put card number here" class="border-solid border-2 rounded-lg border-gray-600 py-1 px-3 bg-gray-600 text-cyan-50 w-48" name="cardValName" [(ngModel)]="cardValModal">
+        </div>
+        <div class="mr-5">
+        <h1 class="text-cyan-50 mb-2" style="font-family: poppins;">Date</h1>
+        <input style="font-family: poppins;" type="text" placeholder="date Here" class="border-solid border-2 rounded-lg border-gray-600 py-1 px-3 bg-gray-600 text-cyan-50 w-24" name="dateMonthYear" [(ngModel)]="cardDateConverted">
+        </div>
+        <div >
+            <h1 class="text-cyan-50 mb-2" style="font-family: poppins;">CVV</h1>
+            <input style="font-family: poppins;" type="text" placeholder="CVV" class="border-solid border-2 rounded-lg border-gray-600 py-1 px-3 bg-gray-600 text-cyan-50 w-16" name="dateCVVName" [(ngModel)]="cardCVVModal">
+            </div>
+    </div>
+    <div class="flex flex-wrap justify-center mt-3">
+      <div class="mr-5">
+        <h1 class="text-cyan-50 mb-2" style="font-family: poppins;">Email</h1>
+        <input style="font-family: poppins;" type="text" placeholder="" class="border-solid border-2 rounded-lg border-gray-600 py-1 px-3 bg-gray-600 text-cyan-50 w-52" name="emailModal" [(ngModel)]="emailModal">
+      </div>
+      <div class="ml-5">
+        <h1 class="text-cyan-50 mb-2" style="font-family: poppins;">Phone</h1>
+        <input style="font-family: poppins;" type="text" placeholder="" class="border-solid border-2 rounded-lg border-gray-600 py-1 px-3 bg-gray-600 text-cyan-50 w-36" name="telModal" [(ngModel)]="telModal">
+      </div>
+    </div>
+    
+</div>
+          <div *ngIf="selectedTab=='shipping'">
+
+            <div class="flex flex-wrap justify-center">
+            <div class="mr-5">
+            <h1 class="text-cyan-50 mb-2" style="font-family: poppins;">First name</h1>
+            <input style="font-family: poppins;" type="text" placeholder="" class="border-solid border-2 rounded-lg border-gray-600 py-1 px-3 bg-gray-600 text-cyan-50 w-40" name="nameModal" [(ngModel)]="nameModal">
+          </div>
+
+          <div>
+            <h1 class="text-cyan-50 mb-2" style="font-family: poppins;">Second name</h1>
+            <input style="font-family: poppins;" type="text" placeholder="" class="border-solid border-2 rounded-lg border-gray-600 py-1 px-3 bg-gray-600 text-cyan-50 w-40" name="secondNameModal" [(ngModel)]="secondNameModal">
+          </div>
+          </div>
+          <div class="flex flex-wrap justify-center mt-3 ml-4">
+            <div class="mr-5">
+              <h1 class="text-cyan-50 mb-2" style="font-family: poppins;">Street</h1>
+              <input style="font-family: poppins;" type="text" placeholder="" class="border-solid border-2 rounded-lg border-gray-600 py-1 px-3 bg-gray-600 text-cyan-50 w-40" name="shippingStreetModal" [(ngModel)]="shippingStreetModal">
+            </div>
+            <div class="mr-5">
+              <h1 class="text-cyan-50 mb-2" style="font-family: poppins;">Street second line</h1>
+              <input style="font-family: poppins;" type="text" placeholder="" class="border-solid border-2 rounded-lg border-gray-600 py-1 px-3 bg-gray-600 text-cyan-50 w-40" name="shippingStreet2Modal" [(ngModel)]="shippingStreet2Modal">
+            </div>
+          </div>
+          <div class="flex flex-wrap justify-center mt-3 ml-4">
+            <div class="mr-5">
+              <h1 class="text-cyan-50 mb-2" style="font-family: poppins;">City</h1>
+              <input style="font-family: poppins;" type="text" placeholder="" class="border-solid border-2 rounded-lg border-gray-600 py-1 px-3 bg-gray-600 text-cyan-50 w-40" name="shippingCityModal" [(ngModel)]="shippingCityModal">
+            </div>
+            <div class="mr-5">
+              <h1 class="text-cyan-50 mb-2" style="font-family: poppins;">Post Code</h1>
+              <input style="font-family: poppins;" type="text" placeholder="" class="border-solid border-2 rounded-lg border-gray-600 py-1 px-3 bg-gray-600 text-cyan-50 w-40" name="shippingPostCodeModal" [(ngModel)]="shippingPostCodeModal">
+            </div>
+          </div>
+
+         
+          </div>
+
+
+          <div *ngIf="selectedTab=='billing'">
+          
+            <div class="flex flex-wrap justify-center">
+              <div class="mr-5">
+              <h1 class="text-cyan-50 mb-2" style="font-family: poppins;">First name</h1>
+              <input style="font-family: poppins;" type="text" placeholder="" class="border-solid border-2 rounded-lg border-gray-600 py-1 px-3 bg-gray-600 text-cyan-50 w-40" name="nameModal" [(ngModel)]="nameModal">
+            </div>
+  
+            <div>
+              <h1 class="text-cyan-50 mb-2" style="font-family: poppins;">Second name</h1>
+              <input style="font-family: poppins;" type="text" placeholder="" class="border-solid border-2 rounded-lg border-gray-600 py-1 px-3 bg-gray-600 text-cyan-50 w-40" name="secondNameModal" [(ngModel)]="secondNameModal">
+            </div>
+            </div>
+            <div class="flex flex-wrap justify-center mt-3 ml-4">
+              <div class="mr-5">
+                <h1 class="text-cyan-50 mb-2" style="font-family: poppins;">Street</h1>
+                <input style="font-family: poppins;" type="text" placeholder="" class="border-solid border-2 rounded-lg border-gray-600 py-1 px-3 bg-gray-600 text-cyan-50 w-40" name="shippingStreetModal" [(ngModel)]="billingStreetModal">
+              </div>
+              <div class="mr-5">
+                <h1 class="text-cyan-50 mb-2" style="font-family: poppins;">Street second line</h1>
+                <input style="font-family: poppins;" type="text" placeholder="" class="border-solid border-2 rounded-lg border-gray-600 py-1 px-3 bg-gray-600 text-cyan-50 w-40" name="shippingStreet2Modal" [(ngModel)]="billingStreet2Modal">
+              </div>
+            </div>
+            <div class="flex flex-wrap justify-center mt-3 ml-4">
+              <div class="mr-5">
+                <h1 class="text-cyan-50 mb-2" style="font-family: poppins;">City</h1>
+                <input style="font-family: poppins;" type="text" placeholder="" class="border-solid border-2 rounded-lg border-gray-600 py-1 px-3 bg-gray-600 text-cyan-50 w-40" name="shippingCityModal" [(ngModel)]="billingCityModal">
+              </div>
+              <div class="mr-5">
+                <h1 class="text-cyan-50 mb-2" style="font-family: poppins;">Post Code</h1>
+                <input style="font-family: poppins;" type="text" placeholder="" class="border-solid border-2 rounded-lg border-gray-600 py-1 px-3 bg-gray-600 text-cyan-50 w-40" name="shippingPostCodeModal" [(ngModel)]="billingPostCodeModal">
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+    
+      <button style="font-family: poppins;"  type="button" class=" text-cyan-50 rounded px-3 py-2 bg-emerald-400 hover:bg-emerald-700 ml-48 mb-3 mt-3" (click)="modal.close('Save click')">Save</button>
+  
+</div>
+  </ng-template>
+  
+  <pre>{{ closeResult }}</pre>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo&family=Noto+Sans&family=Poppins&display=swap"
+      rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-600 h-full">
+  <div class = "flex flex-wrap mx-5">
+  <img  src="assets/primeaio512x512_1.png" width="100px" height="100px" class="my-4"> 
+  
+<div   class="bg-black border-solid border-4 border-cyan-400 rounded-full p-2 flex flex-wrap  justify-center m-auto" >
+  <a routerLink = "/home"><h1 style="font-family: poppins; " class="text-cyan-50 p-2 mx-12 hover:text-cyan-200">Home <fa-icon class="" [icon]="faHome"></fa-icon></h1></a>
+
+  <a routerLink = "/tasks"><h1 style="font-family: poppins; " class="text-cyan-50 p-2 mx-12 hover:text-cyan-200">Tasks <fa-icon class="" [icon]="faBars"></fa-icon></h1></a>
+  <a routerLink = "/proxy"><h1 style="font-family: poppins; " class="text-cyan-50 p-2 mx-12 hover:text-cyan-200">Proxies <fa-icon class="" [icon]="faSateliteDish"></fa-icon></h1></a>
+  <a routerLink = "/profiles"><h1 style="font-family: poppins; " class="text-cyan-50 p-2 mx-12 hover:text-cyan-200">Profiles <fa-icon class="" [icon]="faPerson"></fa-icon></h1></a>
+<a routerLink = "/settings"><h1 style="font-family: poppins; " class="text-cyan-50 p-2 mx-12  hover:text-cyan-200">Settings <fa-icon class="" [icon]="faGear"></fa-icon></h1></a>
+</div>
+
+<div  class="bg-black border-solid border-4 border-cyan-400 rounded-full p-2 flex flex-col  justify-center m-auto">
+
+  <div class="flex flex-wrap">
+   <a routerLink = "/home"><h1 style="font-family: poppins; " class="text-cyan-50 px-1 py-2 mx-12 hover:text-cyan-200">Notifications <fa-icon class="" [icon]="faEnvelope"></fa-icon></h1>
+  </a>
+  
+  <a routerLink = "/tasks"><h1 style="font-family: poppins; " class="text-cyan-50 px-1 py-2 mx-12 hover:text-cyan-200">MyAccount <fa-icon class="" [icon]="faUser"></fa-icon></h1>
+  </a>
+</div>
+
+
+
+<div class="text-center">
+    <h1 style="font-family: poppins; " class="text-cyan-50 mb-1 mt-3">Quick Task preview</h1>
+
+  <div class="flex flex-wrap justify-center">
+
+    <p style="font-family: poppins;" class="text-green-400 mx-4"> <fa-icon class="mr-1"[icon]="faCircleCheck" ></fa-icon>{{success}}</p> 
+    <p style="font-family: poppins;" class="text-red-400 mx-4"> <fa-icon class="mr-1"[icon]="faXmarkCircle" ></fa-icon>{{declined}}</p> 
+    <p style="font-family: poppins;" class="text-indigo-400 mx-4"> <fa-icon class="mr-1"[icon]="faShoppingCart" ></fa-icon>{{inBasket}}</p> 
+    <p style="font-family: poppins;" class="text-purple-400 mx-4"><fa-icon class="mr-1" [icon]="faSpinner"  ></fa-icon> {{running}}</p>
+
+  </div>
+   
+</div>
+
+
+
+
+
+</div>
+
+</div>
+
+
+<router-outlet></router-outlet>
+
+
+</body>

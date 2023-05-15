@@ -1,0 +1,19 @@
+.checkoutsContainer{
+    overflow-y: scroll;
+    max-height: 500px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: rgb(118, 117, 138);
+    border-radius: 20px;
+    border: 3px solid rgb(48, 45, 67);;
+  }
+
+  *::-webkit-scrollbar {
+    width: 12px;
+  }
+
+
+  *::-webkit-scrollbar-track {
+    background: rgb(48, 45, 67);
+  }
