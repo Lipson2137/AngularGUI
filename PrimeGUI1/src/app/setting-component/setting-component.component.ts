@@ -65,7 +65,7 @@ export class SettingComponentComponent implements OnInit {
 }
 
 function sendWebhook(){
-  const whurl = "https://discord.com/api/webhooks/953211576993841162/WI_IbLTsy1MI2XBRhE1mbuWA-YODATXWdqFLcEA7QFC0gIVHoT2IZyHKVdM8-Msdw1fe";
+  const whurl = "your_webhook";
   var msg = {
     "embeds": [{
       "title": "Webhook test",
